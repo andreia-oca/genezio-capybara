@@ -1,0 +1,21 @@
+name: genezio-project
+region: us-east-1
+yamlVersion: 2
+backend:
+  path: server
+  language:
+    name: ts
+    packageManager: npm
+  scripts:
+    deploy: npm install
+  cloudProvider: capybaraLinux
+frontend:
+  path: client
+  sdk:
+    language: ts
+  publish: dist
+  scripts:
+    deploy:
+      - npm install @genezio-sdk/${{projectName}}@1.0.0-${{stage}}
+      - npm install
+      - npm run build
